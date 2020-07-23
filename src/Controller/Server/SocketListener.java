@@ -8,7 +8,6 @@ import java.util.logging.Logger;
 
 public class SocketListener {
 
-    public static final String SERVER_VERSION = "1.0.1";
     private int thePort = 0;
 
     public SocketListener(int newPort) {
@@ -26,9 +25,11 @@ public class SocketListener {
         try {
             serverSocket = new ServerSocket(thePort);
         } catch (IOException ex) {
-            //Logger.getLogger(SocketListener.class.getName()).log(Level.SEVERE, null, ex);
+           
         }
         if (serverSocket != null) {
+            
+            System.out.println("Basic Expert System Server running... :)");
           do{
                 try {
                     socket = serverSocket.accept();
@@ -43,10 +44,10 @@ public class SocketListener {
                         socketCtrl.writeText("BES Server - Leonardo Gonzalez");
                         command1 = socketCtrl.readText();
                        
-                       // while (!command1.trim().toLowerCase().equals("quit")) {
+                        while (!command1.trim().toLowerCase().equals("quit")) {
                             socketCtrl.writeText(cmdProc.responseCommand(command1));
-                        //    command1 = socketCtrl.readText();
-                        //}
+                            command1 = socketCtrl.readText();
+                        }
                         try {
                             socketCtrl.close();
                         } catch (IOException ex) {

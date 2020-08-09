@@ -3,9 +3,6 @@ package Controller.Server;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
-import java.util.logging.Level;
-import java.util.logging.Logger;
-
 public class SocketListener {
 
     private int thePort = 0;
@@ -18,8 +15,6 @@ public class SocketListener {
         ServerSocket serverSocket = null;
         Socket socket = null;
         boolean isRunning = true;
-        //SocketController socketCtrl = null;
-       // String command = "";
         CommandProcessor cmdProc = new CommandProcessor();
 
         try {
@@ -34,7 +29,7 @@ public class SocketListener {
                 try {
                     socket = serverSocket.accept();
                 } catch (IOException ex) {
-                    //Logger.getLogger(SocketListener.class.getName()).log(Level.SEVERE, null, ex);
+                    
                 }
                 try {
                     final SocketController socketCtrl = new SocketController(socket);
@@ -51,11 +46,11 @@ public class SocketListener {
                         try {
                             socketCtrl.close();
                         } catch (IOException ex) {
-                            Logger.getLogger(SocketListener.class.getName()).log(Level.SEVERE, null, ex);
+                             socketCtrl.writeText("Not conection");
                         }
                     });
                 } catch (IOException ex) {
-                   // Logger.getLogger(SocketListener.class.getName()).log(Level.SEVERE, null, ex);
+                    System.out.println("Error in conection");
                 }
 
             } while (isRunning); 
